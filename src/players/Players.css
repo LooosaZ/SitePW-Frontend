@@ -1,0 +1,21 @@
+.players {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border: 1px solid green;
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.buttons {
+    margin-left: 5px;
+}

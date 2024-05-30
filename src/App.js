@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from "react";
+import Players from "./players/Players.js";
+import HomePage from "./homePage/HomePage";
+import LoginForm from "./login/LoginForm";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [darkMode, setDarkMode] = useState(false);
+    const navigate = useNavigate();
+
+    return (
+        <div className={`min-h-screen ${darkMode ? 'bg-dark' : 'bg-light'}`}>
+            <main>
+                <Routes>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/login" element={<LoginForm darkMode={darkMode} setDarkMode={setDarkMode} />} />
+                    <Route path="/players" element={<Players/>}/>
+                </Routes>
+            </main>
+        </div>
+    );
 }
 
 export default App;
