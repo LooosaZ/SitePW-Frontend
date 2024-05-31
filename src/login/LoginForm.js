@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Header from '../header/Header'; // Corrected import path
+import Header from '../header/header.js';
 import "./LoginForm.css";
 
 const LoginForm = () => {
