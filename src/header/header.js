@@ -5,7 +5,7 @@ const Header = ({ darkMode }) => {
         <header className={`header ${darkMode ? 'header-dark' : 'header-light'}`}>
             <div className="container">
                 <h2 className="title">
-                     Serenidade Seguros
+                     Welcome to LuzaServices
                 </h2>
             </div>
         </header>

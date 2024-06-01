@@ -11,7 +11,7 @@ const LoginForm = () => {
     const [darkMode, setDarkMode] = useState(false);
 
     const login = (data) => {
-        fetch("http://127.0.0.1:3001/auth/login", {
+        fetch("http://127.0.0.1:3002/auth/login", {
             headers: { "Content-type": "application/json" },
             method: "POST",
             body: JSON.stringify(data),
