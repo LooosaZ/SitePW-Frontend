@@ -37,7 +37,7 @@ const LoginForm = () => {
     };
 
     if (loginSuccess) {
-        navigate("/players");
+        navigate("/products");
     }
 
     return (
@@ -50,16 +50,16 @@ const LoginForm = () => {
                 {darkMode ? 'Light Mode' : 'Dark Mode'}
             </button>
             <div className={`box ${darkMode ? 'dark-box' : 'light-box'} shadow-md rounded-lg p-8 max-w-sm w-full relative`}>
-                <h2 className={`text-2xl font-bold text-center mb-4 ${darkMode ? 'text-light' : 'text-dark'}`}>Login</h2>
+                <h2 className={`text-2xl font-bold text-center mb-4 ${darkMode ? 'text-light' : 'text-dark'}`}>Please login to continue</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-4">
-                        <label htmlFor="username" className={`block text-sm font-medium ${darkMode ? 'text-light' : 'text-dark'}`}>
+                        <label htmlFor="name" className={`block text-sm font-medium ${darkMode ? 'text-light' : 'text-dark'}`}>
                             Username
                         </label>
                         <input
                             type="text"
-                            id="username"
-                            {...register('username', { required: true })}
+                            id="name"
+                            {...register('name', { required: true })}
                             className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring focus:ring-red-200 ${darkMode ? 'dark-input dark:text-dark-input-text' : 'light-input'}`}
                         />
                     </div>
