@@ -1,54 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import './HomePage.css';
-import Header from '../header/header.js';
 
-const sidebarItems = [
-    { id: 1, name: 'Home' },
-    { id: 2, name: 'Products' },
-    { id: 3, name: 'Template' },
-    { id: 4, name: 'Another Template' },
-];
+const sharedButtonClasses = "text-white px-4 py-2 rounded-lg transition-colors button";
 
 const HomePage = () => {
-    const [darkMode, setDarkMode] = useState(false);
-
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-    };
-
     return (
-        <div className={`home-page ${darkMode ? 'dark' : 'light'}`}>
-            <div className="top-left-container">
-                <button
-                    onClick={toggleDarkMode}
-                    className="toggle-dark-mode"
-                >
-                    {darkMode ? 'Light Mode' : 'Dark Mode'}
-                </button>
-            </div>
-            <div className={`sidebar ${darkMode ? 'dark-box' : 'light-box'}`}>
-                <br/><br/>
-                <ul className="p-4">
-                    {sidebarItems.map((item) => (
-                        <li key={item.id} className={`py-2 ${darkMode ? 'text-light' : 'text-dark'}`}>
-                            {item.name}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
-            <div className={`main-content ${darkMode ? 'dark-box' : 'light-box'}`}>
-                <Header darkMode={darkMode} />
-                <div className="main-content-inner">
-                    <p className={darkMode ? 'text-light' : 'text-dark'}>Click on the button below to login!</p>
-                </div>
-                <div className="login">
-                    <Link to="/login">
-                        <button className="login-button">LOGIN</button>
-                    </Link>
-                </div>
-            </div>
+        <div className="bg-white text-black min-h-screen flex flex-col items-center justify-center">
+            <h1 className="text-4xl font-bold mb-4">Welcome to LuzaServices</h1>
+            <p className="text-lg mb-8">Explore our services and products</p>
+            <a href="/products" className={`button bg-red-500 ${sharedButtonClasses} mb-4 hover:bg-red-600`}>Products</a>
+            <a href="/login" className={`button bg-red-500 ${sharedButtonClasses} hover:bg-red-600`}>Login</a>
         </div>
     );
 };
