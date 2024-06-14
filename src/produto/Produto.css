@@ -1,0 +1,134 @@
+:root {
+  --background-color: #f4f4f4;
+  --background-card: #ffffff;
+  --text-primary: #e74c3c;
+  --text-secondary: #4b4b4b;
+}
+
+.product-card {
+  background-color: var(--background-card);
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  max-width: 1000px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.product-card h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.product-details {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+}
+
+.product-info {
+  flex: 1;
+  margin-left: 20px;
+  text-align: justify;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.product-info h2 {
+  font-size: 2.5em;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  margin-left: 10px
+}
+
+.add-to-cart {
+  background-color: var(--text-primary);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-left: -10px;
+  transition: transform 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background-color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+.low-stock-info {
+  color: rgb(238, 216, 13);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+.no-stock-info {
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+.stock-info {
+  color: rgb(10, 184, 28);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
+
+.favorite-toggle {
+  background: none;
+  border: none;
+  font-size: 3em;
+  cursor: pointer;
+  color: gold;
+  line-height: 1;
+  padding: 0;
+}
+
+.favorite-toggle.favorite {
+  color: darkorange;
+}
+
+.favorite-toggle:hover {
+  color: orange;
+}
+
+.note {
+  flex: 1;
+  font-size: 0.75em;
+  margin-top: -35px;
+  color:#9e9e9e;
+}

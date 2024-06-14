@@ -1,0 +1,218 @@
+:root {
+    --background-color: #f4f4f4;
+    --background-card: #ffffff;
+    --text-primary: #e74c3c;
+    --text-secondary: #4b4b4b;
+}
+
+.background {
+    display: flex;
+    background-color: var(--background-color);
+}
+
+.sidebar {
+    padding: 20px;
+    background-color: var(--background-card);
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.5);
+    min-width: 200px;
+}
+
+.search-products {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--text-secondary);
+    border-radius: 0.375rem;
+    background-color: var(--background-card);
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.sidebar-search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--text-secondary);
+    border-radius: 0.375rem;
+    background-color: var(--background-card);
+    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.sidebar-section {
+    margin-bottom: 1rem;
+}
+
+.sidebar-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--text-secondary);
+    cursor: pointer;
+}
+
+.sidebar-section-header h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.sidebar-section-header span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.sidebar-section-content {
+    padding: 0.5rem 0;
+}
+
+.sidebar-section-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.price-range {
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.no-products {
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.title-product {
+    color: var(--text-secondary);
+    margin: 0;
+    text-align: center;
+    font-weight: normal;
+}
+
+.price-product {
+    color: var(--text-primary);
+    margin: 0;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.product-layer {
+    width: 200px;
+    height: 400px;
+    margin: 18px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    background-color: var(--background-card);
+    transition: transform 100ms ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-layer:hover {
+    transform: scale(1.07);
+    cursor: pointer;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+a {
+    text-decoration: none;
+}
+
+.product-link:hover {
+    text-decoration: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.dropdown select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--text-secondary);
+    border-radius: 0.375rem;
+    background-color: var(--background-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.horizontal-slider {
+    width: 100%;
+    height: 25px;
+}
+
+.thumb {
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border: 2px solid #000;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.track {
+    background: #ddd;
+    height: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.price-labels {
+    display: block;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.product-layer {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.low-stock-info {
+    color: rgb(238, 216, 13);
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+.no-stock-info {
+    color: rgb(255, 0, 0);
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+.stock-info {
+    color: rgb(10, 184, 28);
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    margin: 0;
+}

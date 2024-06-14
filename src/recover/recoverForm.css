@@ -1,0 +1,77 @@
+:root {
+    --background-red: #ef4444;
+    --background-dark_red: #ef4444;
+    --text-primary: #ef4444;
+    --text-secondary: #4b4b4b;
+}
+
+.forgotPasswordForm {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .forgotPasswordForm h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-forgot-password {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-forgot-password .field {
+    margin-bottom: 15px;
+  }
+  
+  .form-forgot-password label {
+    font-weight: bold;
+  }
+  
+  .form-forgot-password .email {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .form-forgot-password .submit {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--background-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .form-forgot-password .submit:hover {
+    background-color: var(--background-dark_red);
+  }
+  
+  .error-message {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+  
+  .return-link {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .return-link a {
+    text-decoration: none;
+  }
+  
+  .return-link a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,28 @@
+.login-link {
+    margin-top: 20px;
+    text-align: left;
+    color: var(--background-dark_red);
+    text-decoration: none;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .nome, .morada, .telemovel, .dataNascimento, .nif, .email {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .login-link {
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .login-link a {
+    color: #007bff; /* Cor do link azul */
+  }
