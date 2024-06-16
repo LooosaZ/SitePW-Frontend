@@ -112,7 +112,7 @@ const UserForm = () => {
           navigate("/login");
         } else {
           alert("Successfully updated user data.");
-          navigate("/me");
+          navigate(`/admin/users/${username}`);
         }
       } else {
         const errorData = await response.json();

@@ -73,7 +73,7 @@ const ProductComponent = () => {
     
      // eslint-disable-next-line
      const fetchProducts = useCallback(
-        debounce(async (query, minPrice, maxPrice, sort, order, stockStatus, page) => {
+        debounce(async (query, minPrice, maxPrice, sort, order, stockStatus, page, favoritesOnly) => {
             try {
                 setIsFetching(true);
                 const response = await fetch(`http://127.0.0.1:3001/menu/produtos?searchField=nome&searchValue=${query}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sort}&sortOrder=${order}&stockStatus=${stockStatus}&page=${page}`);

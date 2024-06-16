@@ -136,32 +136,32 @@ const EditProfile = () => {
         </div>
         <div className="field">
           <label>Name:</label>
-          <input className="nome" {...register("nome", { required: true })} />
+          <input className="username" {...register("nome", { required: true })} />
           {errors.nome && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Address:</label>
-          <input className="morada" {...register("morada", { required: true })} />
+          <input className="username" {...register("morada", { required: true })} />
           {errors.morada && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Phone Number:</label>
-          <input className="telemovel" {...register("telemovel", { required: true })} />
+          <input className="username" {...register("telemovel", { required: true })} />
           {errors.telemovel && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Birthdate:</label>
-          <input className="dataNascimento" type="date" {...register("dataNascimento", { required: true })} />
+          <input className="username" type="date" {...register("dataNascimento", { required: true })} />
           {errors.dataNascimento && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>NIF:</label>
-          <input className="nif" {...register("nif", { required: true })} />
+          <input className="username" {...register("nif", { required: true })} />
           {errors.nif && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Email:</label>
-          <input className="email" type="email" {...register("email", { required: true })} />
+          <input className="username" type="email" {...register("email", { required: true })} />
           {errors.email && <span className="error-message">This field can't be empty.</span>}
         </div>
         <input className="submit" type="submit" value="Update" />
