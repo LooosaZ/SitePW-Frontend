@@ -1,0 +1,76 @@
+:root {
+    --background-color: #f4f4f4;
+    --background-card: #ffffff;
+    --background-red: #e74c3c;
+    --background-dark_red: #c0392b;
+    --text-primary: #e74c3c;
+    --text-secondary: #4b4b4b;
+}
+
+.editProfile {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.editProfile h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-edit {
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    margin-bottom: 10px;
+}
+
+.field label {
+    font-weight: bold;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+}
+
+.nome,
+.morada,
+.telemovel,
+.dataNascimento,
+.nif,
+.email {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.submit {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: var(--background-red);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit:hover {
+    background-color: var(--background-red);
+    transform: scale(1.05);
+}
+
+.submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
