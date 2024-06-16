@@ -1,0 +1,85 @@
+:root {
+    --background-color: #f4f4f4;
+    --background-card: #ffffff;
+    --background-red: #31aa3b;
+    --background-dark_red:#31aa3b;
+    --text-primary: #31aa3b;
+    --text-secondary: #4b4b4b;
+}
+
+.adicionarProdutoForm {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .adicionarProdutoForm h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-adicionar-produto .field {
+    margin-bottom: 15px;
+  }
+  
+  .form-adicionar-produto label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .nomeProduto, .descricao, .preco, .categoria, .referencia {
+    display: flex;
+    width: 97%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-adicionar-produto textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .form-adicionar-produto .error-message {
+    color: red;
+    font-size: 14px;
+  }
+  
+  .form-adicionar-produto .submit {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--background-red);
+  }
+  
+  .form-adicionar-produto .submit:hover {
+    background-color: var(--background-dark_red);
+  }
+  
+  .login-link {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .login-link a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import "./ProfilePage.css";
+import { Link, useParams } from "react-router-dom";
+// import "./ProfilePage.css";
 
 const UserProfile = () => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [products, setProducts] = useState([]);
   const [profileImage, setProfileImage] = useState(null);
+  const { username } = useParams();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -21,7 +22,7 @@ const UserProfile = () => {
           console.error('Erro ao extrair token do cookie:', error);
         }
 
-        const response = await fetch("http://127.0.0.1:3001/menu/utilizador/me", {
+        const response = await fetch(`http://127.0.0.1:3001/menu/utilizadores/${username}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -30,9 +31,11 @@ const UserProfile = () => {
           credentials: "include",
         });
 
+        console.log(username);
         if (response.ok) {
           const userData = await response.json();
           setUser(userData);
+          console.log(userData);
 
           if (userData.role && userData.role.nome === 'administrador') {
             fetchProducts(token);
@@ -68,7 +71,7 @@ const UserProfile = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [username]);
 
   const handleDeleteUser = async (userId) => {
     try {
@@ -163,7 +166,7 @@ const UserProfile = () => {
         console.error('Erro ao extrair token do cookie:', error);
       }
 
-      const response = await fetch("http://127.0.0.1:3001/menu/utilizador/me", {
+      const response = await fetch(`http://127.0.0.1:3001/menu/utilizador/${user.username}/profile-picture`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -221,11 +224,8 @@ const UserProfile = () => {
       <div className="userField">
         <strong>Account type:</strong> <span>{user.role.nome}</span>
       </div>
-      <Link to={{ pathname: "/me/editar", state: { userData: user } }} className="edit-profile-button">
+      <Link to={{ pathname: `/admin/users/edit/${username}`, state: { userData: user } }} className="edit-profile-button">
         Edit Profile
-      </Link>
-      <Link to={{ pathname: "/me/editar/password", state: { userData: user } }} className="password-button">
-        Change Password
       </Link>
     </div>
   );

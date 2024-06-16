@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import "./editar.css";
+import { useNavigate, useParams } from "react-router-dom";
 
-const EditProfile = () => {
+const UserForm = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors }, setValue, getValues } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
+  const { username } = useParams();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const cookieValue = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1"));
-
         let token = '';
         try {
           const parsedCookie = JSON.parse(cookieValue.replace(/^j:/, ''));
@@ -22,7 +21,7 @@ const EditProfile = () => {
           console.error('Erro ao extrair token do cookie:', error);
         }
 
-        const response = await fetch("http://127.0.0.1:3001/menu/utilizador/me", {
+        const response = await fetch(`http://127.0.0.1:3001/menu/utilizadores/${username}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -42,14 +41,15 @@ const EditProfile = () => {
           setValue("dataNascimento", formattedDate);
           setValue("nif", userData.nif || "");
           setValue("email", userData.email || "");
+          setValue("role", userData.role.nome || ""); 
           setLoading(false);
         } else {
           console.error(`Erro ao carregar os dados do utilizador: ${response.status}`);
-          alert("Errow while trying to load user data. Try again later.");
+          alert("Error while trying to load user data. Try again later.");
         }
       } catch (error) {
         console.error("Erro ao carregar os dados do utilizador:", error);
-        alert("Errow while trying to load user data. Verify your connection or try again later.");
+        alert("Error while trying to load user data. Verify your connection or try again later.");
       }
     };
 
@@ -59,7 +59,6 @@ const EditProfile = () => {
   const onSubmit = async (data) => { 
     try {
       const cookieValue = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1"));
-
       let token = '';
       try {
         const parsedCookie = JSON.parse(cookieValue.replace(/^j:/, ''));
@@ -91,7 +90,11 @@ const EditProfile = () => {
         modifiedFields.email = data.email;
       }
 
-      const response = await fetch("http://127.0.0.1:3001/menu/utilizador/me", {
+      if (data.role !== userData.role.nome) {
+      modifiedFields.role = { nome: data.role };
+    }
+
+      const response = await fetch(`http://127.0.0.1:3001/menu/utilizadores/${username}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -136,33 +139,41 @@ const EditProfile = () => {
         </div>
         <div className="field">
           <label>Name:</label>
-          <input className="nome" {...register("nome", { required: true })} />
+          <input className="username" {...register("nome", { required: true })} />
           {errors.nome && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Address:</label>
-          <input className="morada" {...register("morada", { required: true })} />
+          <input className="username" {...register("morada", { required: true })} />
           {errors.morada && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Phone Number:</label>
-          <input className="telemovel" {...register("telemovel", { required: true })} />
+          <input className="username" {...register("telemovel", { required: true })} />
           {errors.telemovel && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Birthdate:</label>
-          <input className="dataNascimento" type="date" {...register("dataNascimento", { required: true })} />
+          <input className="username" type="date" {...register("dataNascimento", { required: true })} />
           {errors.dataNascimento && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>NIF:</label>
-          <input className="nif" {...register("nif", { required: true })} />
+          <input className="username" {...register("nif", { required: true })} />
           {errors.nif && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Email:</label>
-          <input className="email" type="email" {...register("email", { required: true })} />
+          <input className="username" type="email" {...register("email", { required: true })} />
           {errors.email && <span className="error-message">This field can't be empty.</span>}
+        </div>
+        <div className="field">
+          <label>Account type:</label>
+          <select className="username" {...register("role", { required: true })}>
+            <option value="utilizador">utilizador</option>
+            <option value="administrador">administrador</option>
+          </select>
+          {errors.role && <span className="error-message">This field can't be empty.</span>}
         </div>
         <input className="submit" type="submit" value="Update" />
       </form>
@@ -170,4 +181,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default UserForm;

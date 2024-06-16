@@ -1,7 +1,7 @@
 :root {
-    --background-red: #ef4444;
-    --background-dark_red: #ef4444;
-    --text-primary: #ef4444;
+    --background-red: #31aa3b;
+    --background-dark_red: #31aa3b;
+    --text-primary: #31aa3b;
     --text-secondary: #4b4b4b;
 }
 
@@ -42,7 +42,7 @@ h2 {
     padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: var(--background-red);
+    background-color: #31aa3b;
     color: #fff;
     cursor: pointer;
     font-size: 16px;
@@ -50,14 +50,14 @@ h2 {
 }
 
 .submit:hover {
-    background-color: var(--background-dark_red);
+    background-color: #268d2f;
     transform: scale(1.05);
 }
 
 .return-link {
     margin-top: 20px;
     text-align: left;
-    color: var(--background-dark_red);
+    color: #268d2f;
     text-decoration: none;
 }
 
@@ -77,6 +77,6 @@ h2 {
 }
 
 .register-link a:hover {
-    background-color: rgb(66, 49, 49);
+    background-color: rgb(50, 66, 49);
     transform: scale(1.05);
 }

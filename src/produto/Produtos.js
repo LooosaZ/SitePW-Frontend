@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './Produtos.css';
 import ReactSlider from 'react-slider';
 import { Link } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import debounce from 'lodash.debounce';
 
 const ProductCard = ({ nome, preco, imagem, stock, referencia, isAdmin }) => {
@@ -16,15 +17,15 @@ const ProductCard = ({ nome, preco, imagem, stock, referencia, isAdmin }) => {
                 {stock ? (
                     stock.quantidade > 0 ? (
                         stock.quantidade < 5 ? (
-                            <p className="low-stock-info">🟡 Quase a esgotar</p>
+                            <p className="low-stock-info">🟡 Low stock ({stock.quantidade})</p>
                         ) : (
-                            <p className="stock-info">🟢 Em stock</p>
+                            <p className="stock-info">🟢 In stock ({stock.quantidade})</p>
                         )
                     ) : (
-                        <p className="no-stock-info">🔴 Não tem stock</p>
+                        <p className="no-stock-info">🔴 No stock</p>
                     )
                 ) : (
-                    <p className="no-stock-info">Sem informações de stock disponíveis</p>
+                    <p className="no-stock-info">No stock information avaliable</p>
                 )}
             </div>
         </Link>
@@ -66,20 +67,29 @@ const ProductComponent = () => {
     const [favorites, setFavorites] = useState([]);
     const [tokenAvailable, setTokenAvailable] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
-
-    const fetchProducts = useCallback(
-        debounce(async (query, minPrice, maxPrice, sort, order, stockStatus) => {
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    const [isFetching, setIsFetching] = useState(false);
+    
+     // eslint-disable-next-line
+     const fetchProducts = useCallback(
+        debounce(async (query, minPrice, maxPrice, sort, order, stockStatus, page) => {
             try {
-                const response = await fetch(`http://127.0.0.1:3001/menu/produtos?searchField=nome&searchValue=${query}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sort}&sortOrder=${order}&stockStatus=${stockStatus}`);
+                setIsFetching(true);
+                const response = await fetch(`http://127.0.0.1:3001/menu/produtos?searchField=nome&searchValue=${query}&minPrice=${minPrice}&maxPrice=${maxPrice}&sortBy=${sort}&sortOrder=${order}&stockStatus=${stockStatus}&page=${page}`);
                 const data = await response.json();
-                setProducts(data);
-                console.log('Produtos recebidos:', data);
+                setProducts((prevProducts) => (page === 1 ? data.products : [...prevProducts, ...data.products]));
+                setTotalPages(data.totalPages);
+                console.log('received products:', data);
+                setIsFetching(false);
             } catch (err) {
                 console.error('Error fetching products:', err);
+                setIsFetching(false);
             }
         }, 500),
         []
     );
+
 
     const fetchFavorites = useCallback(async () => {
         try {
@@ -90,7 +100,7 @@ const ProductComponent = () => {
                 const parsedCookie = JSON.parse(cookieValue.replace(/^j:/, ''));
                 token = parsedCookie.token;
             } catch (error) {
-                console.error('Erro ao extrair token do cookie:', error);
+                console.error('Error while extracting cookie:', error);
             }
 
             const response = await fetch('http://127.0.0.1:3001/menu/utilizador/filtrarfavoritos', {
@@ -109,8 +119,8 @@ const ProductComponent = () => {
     }, []);
 
     useEffect(() => {
-        fetchProducts(searchQuery, priceRange[0], priceRange[1], sortBy, sortOrder, stockStatus);
-    }, [searchQuery, priceRange, sortBy, sortOrder, stockStatus, fetchProducts]);
+        fetchProducts(searchQuery, priceRange[0], priceRange[1], sortBy, sortOrder, stockStatus, page);
+    }, [searchQuery, priceRange, sortBy, sortOrder, stockStatus, page, fetchProducts]);
 
     useEffect(() => {
         const cookieValue = decodeURIComponent(document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1"));
@@ -127,9 +137,10 @@ const ProductComponent = () => {
 
                 const { role } = JSON.parse(jsonPayload);
                 console.log(role);
-                if (role == 'administrador') { setIsAdmin(true)};
+                 // eslint-disable-next-line
+                if (role == 'administrador') { setIsAdmin(true) };
             } catch (error) {
-                console.error('Erro ao analisar token:', error);
+                console.error('Error while analizing token:', error);
             }
         } else {
             setFavorites([]);
@@ -145,6 +156,15 @@ const ProductComponent = () => {
         }
     }, [favoritesOnly, fetchFavorites, tokenAvailable]);
 
+    const resetProducts = () => {
+        setProducts([]);
+        setPage(1);
+    };
+    
+    useEffect(() => {
+        resetProducts();
+    }, [searchQuery, priceRange, sortBy, sortOrder, stockStatus, favoritesOnly]);
+
     const handleSortChange = (e) => {
         const value = e.target.value;
         if (value === 'az' || value === 'za') {
@@ -155,6 +175,19 @@ const ProductComponent = () => {
             setSortOrder(value === 'lowPrice' ? 'asc' : 'desc');
         }
     };
+
+    const handleScroll = () => {
+        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+        if (scrollTop + clientHeight >= scrollHeight && page < totalPages && !isFetching) {
+            setPage(prevPage => prevPage + 1);
+        }
+    };
+    
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+         // eslint-disable-next-line
+    }, [page, totalPages, isFetching]);
 
     const handleCategoryChange = (category) => {
         const lowerCaseCategory = category.toLowerCase();
@@ -179,51 +212,73 @@ const ProductComponent = () => {
 
     const categories = [...new Set(products.map(product => product.categoria.toLowerCase()))].sort().map(category => category.toUpperCase());
 
-const filteredProducts = products.filter(product => {
-    if (selectedCategories.length === 0) {
-        return true;
-    }
-    return selectedCategories.includes(product.categoria.toLowerCase());
-}).filter(product => {
-    if (stockStatus === 'all') {
-        return true;
-    } else if (stockStatus === 'inStock') {
-        return product.stock && product.stock.quantidade > 0;
-    } else if (stockStatus === 'outOfStock') {
-        return !product.stock || product.stock.quantidade <= 0;
-    }
-}).filter(product => {
-    if (!favoritesOnly || !tokenAvailable) {
-        return true;
-    }
-    return favorites.includes(product.referencia);
-});
+    const filteredProducts = products.filter(product => {
+        if (selectedCategories.length === 0) {
+            return true;
+        }
+        return selectedCategories.includes(product.categoria.toLowerCase());
+         // eslint-disable-next-line
+    }).filter(product => {
+        if (stockStatus === 'all') {
+            return true;
+        } else if (stockStatus === 'inStock') {
+            return product.stock && product.stock.quantidade > 0;
+        } else if (stockStatus === 'outOfStock') {
+            return !product.stock || product.stock.quantidade <= 0;
+        }
+    }).filter(product => {
+        if (!favoritesOnly || !tokenAvailable) {
+            return true;
+        }
+        return favorites.includes(product.referencia);
+    });
 
     return (
         <div className="background">
             <div className="sidebar">
-                <SidebarSection title="Nome">
+                {isAdmin && (
+                    <SidebarSection title="Admin section">
+                        <Link to="/admin/produtos/adicionar" className="add-product-link">
+                            <button className="add-product-button">
+                                Add new product
+                            </button>
+                        </Link>
+                        <br></br>
+                        <Link to="/admin/stock" className="add-product-link">
+                            <button className="add-product-button">
+                                Manage Stock
+                            </button>
+                        </Link>
+                        <br></br>
+                        <Link to="/admin/vendas" className="add-product-link">
+                            <button className="add-product-button">
+                            Manage Sales
+                            </button>
+                        </Link>
+                    </SidebarSection>
+                )}
+                <SidebarSection title="Name">
                     <div className="name">
                         <input
                             type="text"
-                            placeholder="Pesquisar produto"
+                            placeholder="Search Product"
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
                             className="search-products"
                         />
                     </div>
                 </SidebarSection>
-                <SidebarSection title="Ordenação">
+                <SidebarSection title="Filter">
                     <div className="dropdown">
                         <select value={sortBy === 'nome' ? (sortOrder === 'asc' ? 'az' : 'za') : (sortOrder === 'asc' ? 'lowPrice' : 'highPrice')} onChange={handleSortChange}>
-                            <option value="az">Ordernar A-Z</option>
-                            <option value="za">Ordenar Z-A</option>
-                            <option value="lowPrice">Ordenar preço mais baixo</option>
-                            <option value="highPrice">Ordenar preço mais alto</option>
+                            <option value="az">A-Z</option>
+                            <option value="za">Z-A</option>
+                            <option value="lowPrice">Low-High</option>
+                            <option value="highPrice">High-Low</option>
                         </select>
                     </div>
                 </SidebarSection>
-                <SidebarSection title="Preço">
+                <SidebarSection title="Price">
                     <div className="price-range">
                         <ReactSlider
                             className="horizontal-slider"
@@ -251,7 +306,7 @@ const filteredProducts = products.filter(product => {
                                 checked={stockStatus === 'all'}
                                 onChange={() => handleStockStatusChange('all')}
                             />
-                            Todos
+                            All
                         </label>
                         <label>
                             <input
@@ -260,7 +315,7 @@ const filteredProducts = products.filter(product => {
                                 checked={stockStatus === 'inStock'}
                                 onChange={() => handleStockStatusChange('inStock')}
                             />
-                            Em stock
+                            In stock
                         </label>
                         <label>
                             <input
@@ -269,12 +324,12 @@ const filteredProducts = products.filter(product => {
                                 checked={stockStatus === 'outOfStock'}
                                 onChange={() => handleStockStatusChange('outOfStock')}
                             />
-                            Sem stock
+                            No stock
                         </label>
                     </div>
                 </SidebarSection>
                 {tokenAvailable && (
-                    <SidebarSection title="Favoritos">
+                    <SidebarSection title="Favorites">
                         <div className="favorites-filter">
                             <label>
                                 <input
@@ -282,12 +337,12 @@ const filteredProducts = products.filter(product => {
                                     checked={favoritesOnly}
                                     onChange={handleFavoritesChange}
                                 />
-                                Apenas Favoritos
+                                Show only favorites
                             </label>
                         </div>
                     </SidebarSection>
                 )}
-                <SidebarSection title="Categorias">
+                <SidebarSection title="Categories">
                     <div className="subcategory">
                         {categories.map((category, index) => (
                             <label key={index}>
@@ -304,9 +359,23 @@ const filteredProducts = products.filter(product => {
                 </SidebarSection>
             </div>
             {filteredProducts.length === 0 ? (
-                <p className="no-products">Não há produtos com esses filtros</p>
+                <p className="no-products">No avaliable products for set filter</p>
             ) : (
-                <ProductGrid products={filteredProducts} isAdmin={isAdmin} />
+                <InfiniteScroll
+                    dataLength={filteredProducts.length}
+                    next={() => setPage(page)}
+                    hasMore={page < totalPages}
+                    loader={ <h4>Loading...</h4>}
+                    scrollThreshold={0.9}
+                >
+                    <ProductGrid products={filteredProducts} isAdmin={isAdmin} />
+                    <br></br><br></br><br></br><br></br>
+                    {page >= totalPages && (
+                <p style={{ textAlign: 'center', marginTop: '20px', marginBottom: '40px' }}>
+                    <b>No more products avaliable for listing.</b>
+                </p>
+            )}
+                </InfiniteScroll>
             )}
         </div>
     );

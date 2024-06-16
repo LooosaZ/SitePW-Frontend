@@ -120,43 +120,43 @@ const EditProductForm = () => {
 
     return (
         <div className="edit-product">
-            <h2>Editar produto</h2>
+            <h2>Edit Product</h2>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <label>
-                        Referência:
+                        Reference:
                         <input type="text" name="referencia" value={product.referencia} readOnly />
                     </label>
                     <label>
-                        Nome:
+                        Name:
                         <input type="text" name="nome" value={product.nome} onChange={handleChange} required />
                     </label>
                     <label>
-                        Descrição:
+                        Description:
                         <textarea name="descricao" value={product.descricao} onChange={handleChange} required />
                     </label>
                     <label>
-                        Preço:
+                        Price:
                         <div className="preco-container">
                             <input className="preco-prod" type="number" name="preco" value={product.preco} onChange={handleChange} required step="0.01" />
                             <span className="currency-symbol">€</span>
                         </div>
                     </label>
                     <label>
-                        Categoria:
+                        Category:
                         <input type="text" name="categoria" value={product.categoria} onChange={handleChange} required />
                     </label>
                     <div className="button-container">
-                        <button type="submit" className="update-button">Atualizar Produto</button>
-                        <button type="button" className="delete-button" onClick={handleDelete}>Eliminar Produto</button>
+                        <button type="submit" className="update-button">Update Product</button>
+                        <button type="button" className="delete-button" onClick={handleDelete}>Delete Product</button>
                     </div>
                 </form>
                 <div className="image-panel">
                     <label>
-                        Imagem:
+                        Image:
                         {imagePreview && (
                             <div className="image-preview">
-                                <img src={imagePreview} alt="Imagem do Produto" />
+                                <img src={imagePreview} alt="Product Image" />
                             </div>
                         )}
                         <input type="file" accept="image/*" onChange={handleImageChange} />

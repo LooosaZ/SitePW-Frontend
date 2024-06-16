@@ -1,7 +1,7 @@
 :root {
     --background-color: #f4f4f4;
     --background-card: #ffffff;
-    --text-primary: #e74c3c;
+    --text-primary: #31aa3b;
     --text-secondary: #4b4b4b;
 }
 
@@ -215,4 +215,20 @@ a {
     font-size: 1.1rem;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     margin: 0;
+}
+
+.add-product-button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--background-red);
+    color: #fffb00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-product-button:hover {
+    background-color: var(--background-red);
+    transform: scale(1.05);
 }

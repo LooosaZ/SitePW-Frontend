@@ -70,26 +70,24 @@ const Header = () => {
 
     return (
         <header className="header">
-            <h1>Lusa Phones</h1>
+            <h1>Brasicolage</h1>
             <nav>
                 <ul className="prod">
-                    <li><NavLink to="/produtos">Produtos</NavLink></li>
+                    <li><NavLink to="/produtos">Products</NavLink></li>
                 </ul>
                 <ul className="perfil">
                     {loggedIn ? (
                         <>
                             {userRole === 'administrador' && (
                                 <>
-                                    <li><NavLink to="/admin/utilizadores">Gestão de Utilizadores</NavLink></li>
-                                    <li><NavLink to="/admin/produtos">Gestão de Produtos</NavLink></li>
-                                    <li><NavLink to="/admin/stock">Gestão de Stock</NavLink></li>
-                                    <li><NavLink to="/admin/vendas">Gestão de Vendas</NavLink></li>
+                                    <li><NavLink to="/admin/users">Users management</NavLink></li>
+                                    <li><NavLink to="/me">My account</NavLink></li>
                                 </>
                             )}
                             {userRole === 'utilizador' && (
                                 <>
-                                    <li><NavLink to="/carrinho">Carrinho</NavLink></li>
-                                    <li><NavLink to="/me">Minha conta</NavLink></li>
+                                    <li><NavLink to="/carrinho">Cart</NavLink></li>
+                                    <li><NavLink to="/me">My account</NavLink></li>
                                 </>
                             )}
                             <li><NavLink to="/login" onClick={handleLogout}>Logout</NavLink></li>

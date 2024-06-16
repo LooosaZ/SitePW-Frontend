@@ -11,7 +11,10 @@ import User from "./users/ProfilePage";
 import Editar from "./editar/editar";
 import Password from "./editar/password";
 import GestaoProduto from "./gestao/produtos/produtosG";
-import StockPage from "./gestao/stocks/stockPage";
+import AdicionarProduto from "./gestao/produtos/produtosA";
+import UserList from "./gestao/utilizadores/UserList";
+import UserEdit from "./gestao/utilizadores/UserEdit";
+import UserProfile from "./gestao/utilizadores/UserProfile";
 
 function App() {
     return (
@@ -28,9 +31,11 @@ function App() {
                     <Route path="/me/editar/password" element={<Password />} />
                     <Route path="/produtos" element={<Produtos />} />
                     <Route path="/produtos/:referencia" element={<Produto />} />
-                    <Route path="/me" element={<User />} />
                     <Route path="/admin/produto/:referencia" element={<GestaoProduto />} />
-                    <Route path="/admin/stock/" element={<StockPage />} />
+                    <Route path="/admin/produtos/adicionar" element={<AdicionarProduto />} />
+                    <Route path="/admin/users" element={<UserList />} />
+                    <Route path="/admin/users/:username" element={<UserProfile />} />
+                    <Route path="/admin/users/edit/:username" element={<UserEdit />} />
                 </Routes>
             </main>
         </div>

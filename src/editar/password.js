@@ -36,7 +36,7 @@ const ChangePassword = () => {
       setLoading(false);
 
       if (response.ok) {
-        alert("Password alterada com sucesso!");
+        alert("Successfully changed passwords. Please login again.");
         // Remover o token do cookie
         document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
@@ -49,34 +49,34 @@ const ChangePassword = () => {
     } catch (error) {
       setLoading(false);
       console.error("Erro ao alterar a Password:", error);
-      alert("Erro ao alterar a Password. Verifique sua conexão ou tente novamente mais tarde");
+      alert("Errow while trying to update password. Verify your connection or try again later.");
     }
   };
 
   return (
     <div className="changePassword">
-      <h2>Alterar Password</h2>
+      <h2>Change Password</h2>
       <form className="form-edit" onSubmit={handleSubmit(onSubmit)}>
         <div className="field">
-          <label>Password Atual:</label>
+          <label>Current Password:</label>
           <input
             className="currentPassword"
             type="password"
             {...register("currentPassword", { required: true })}
           />
-          {errors.currentPassword && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.currentPassword && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
-          <label>Nova Password:</label>
+          <label>New Password:</label>
           <input
             className="newPassword"
             type="password"
             {...register("newPassword", { required: true, minLength: 6 })}
           />
-          {errors.newPassword && <span className="error-message">Este campo é obrigatório e deve ter pelo menos 6 caracteres.</span>}
+          {errors.newPassword && <span className="error-message">This field can't be empty and must contain at least 6 characters.</span>}
         </div>
         <div className="field">
-          <label>Confirmar Nova Password:</label>
+          <label>Confirm New Password:</label>
           <input
             className="confirmNewPassword"
             type="password"
@@ -85,9 +85,9 @@ const ChangePassword = () => {
               validate: value => value === getValues("newPassword") || "As Passwords não coincidem",
             })}
           />
-          {errors.confirmNewPassword && <span className="error-message">{errors.confirmNewPassword.message || "Este campo é obrigatório."}</span>}
+          {errors.confirmNewPassword && <span className="error-message">{errors.confirmNewPassword.message || "This field can't be empty."}</span>}
         </div>
-        <input className="submit" type="submit" value="Alterar Password" disabled={loading} />
+        <input className="submit" type="submit" value="Confirm" disabled={loading} />
       </form>
     </div>
   );

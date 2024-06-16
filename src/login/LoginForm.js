@@ -37,6 +37,7 @@ const Login = () => {
     useEffect(() => {
         if (loginSuccess) {
             navigate("/produtos");
+            window.location.reload();
         }
     }, [loginSuccess, navigate]);
 
@@ -52,16 +53,16 @@ const Login = () => {
                     <label>Password:</label>
                     <input className="password" type="password" {...register("password")} />
                 </div>
-                <input className="submit" type="submit" />
+                <input className="submit" type="submit" value="Login"/>
             </form>
             <div className="forgot-link">
-                <Link to="/recover">Redefinir palavra-passe</Link>
+                <Link to="/recover">Forgot your password?</Link>
             </div>
             <div className="register-link">
-                <Link to="/registar">Registar novo utilizador</Link>
+                <Link to="/registar">I don't have an account</Link>
             </div>
             <div className="return-link">
-                <Link to="/produtos">🡸 Voltar para a página de produtos</Link>
+                <Link to="/produtos">🡸 Take me back to the products page</Link>
             </div>
         </div>
     );

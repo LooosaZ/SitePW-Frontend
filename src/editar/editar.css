@@ -1,9 +1,9 @@
 :root {
     --background-color: #f4f4f4;
     --background-card: #ffffff;
-    --background-red: #e74c3c;
-    --background-dark_red: #c0392b;
-    --text-primary: #e74c3c;
+    --background-red: #31aa3b;
+    --background-dark_red: #31aa3b;
+    --text-primary: #31aa3b;
     --text-secondary: #4b4b4b;
 }
 
@@ -57,7 +57,7 @@
     width: 100%;
     padding: 10px;
     margin-top: 15px;
-    background-color: var(--background-red);
+    background-color: #31aa3b;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -66,7 +66,7 @@
 }
 
 .submit:hover {
-    background-color: var(--background-red);
+    background-color: #31aa3b;
     transform: scale(1.05);
 }
 

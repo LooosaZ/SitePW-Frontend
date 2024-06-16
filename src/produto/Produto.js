@@ -96,7 +96,7 @@ const ProductDetails = () => {
                 )}
                 <div className="product-info">
                     <h2>{productDetails.preco.toFixed(2)} €</h2>
-                    <p className="note"> Vendido por: <strong>Lusa Phones</strong></p>
+                    <p className="note"> Vendido por: <strong>Brasicolage</strong></p>
                     <p><strong>Referência: {productDetails.referencia}</strong></p>
                     <p><strong>Nome:</strong> {productDetails.nome}</p>
                     <p><strong>Descrição:</strong> {productDetails.descricao}</p>
@@ -104,16 +104,16 @@ const ProductDetails = () => {
                     {stock ? (
                         stock.quantidade > 0 ? (
                             stock.quantidade < 5 ? (
-                                <p className="low-stock-info">🟡 Quase a esgotar</p>
-                            ) : (
-                                <p className="stock-info">🟢 Em stock</p>
-                            )
+                                <p className="low-stock-info">🟡 Baixo stock ({stock.quantidade})</p>
                         ) : (
-                            <p className="no-stock-info">🔴 Não tem stock</p>
+                            <p className="stock-info">🟢 Em stock ({stock.quantidade})</p>
                         )
                     ) : (
-                        <p className="no-stock-info">Sem informação de stock disponível</p>
-                    )}
+                        <p className="no-stock-info">🔴 Sem stock</p>
+                    )
+                ) : (
+                    <p className="no-stock-info">Sem informações de stock disponíveis</p>
+                )}
                     <div className="button-container">
                         <button className="add-to-cart">ADICIONAR AO CARRINHO</button>
                         {token && (
