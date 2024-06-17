@@ -15,6 +15,7 @@ import AdicionarProduto from "./gestao/produtos/produtosA";
 import UserList from "./gestao/utilizadores/UserList";
 import UserEdit from "./gestao/utilizadores/UserEdit";
 import UserProfile from "./gestao/utilizadores/UserProfile";
+import ErrorPage from "./ErrorPage/ErrorPage.js";
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/admin/users" element={<UserList />} />
                     <Route path="/admin/users/:username" element={<UserProfile />} />
                     <Route path="/admin/users/edit/:username" element={<UserEdit />} />
+                    <Route path="/*" element={<ErrorPage />} />
                 </Routes>
             </main>
         </div>
