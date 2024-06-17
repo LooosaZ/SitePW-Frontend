@@ -96,14 +96,14 @@ const UserProfile = () => {
 
       if (response.ok) {
         setUsers(users.filter(user => user._id !== userId));
-        alert("Utilizador deletado com sucesso!");
+        alert("Successfully deleted user.");
       } else {
         console.error(`Erro ao deletar utilizador: ${response.status}`);
-        alert("Erro ao deletar utilizador.");
+        alert("Error while trying to delete user.");
       }
     } catch (error) {
       console.error("Erro ao deletar utilizador:", error);
-      alert("Erro ao deletar utilizador. Verifique sua conexão ou tente novamente mais tarde.");
+      alert("Error while trying to delete user. Verify your connection or try again later.");
     }
   };
 

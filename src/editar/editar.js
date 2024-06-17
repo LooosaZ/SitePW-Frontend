@@ -45,11 +45,11 @@ const EditProfile = () => {
           setLoading(false);
         } else {
           console.error(`Erro ao carregar os dados do utilizador: ${response.status}`);
-          alert("Errow while trying to load user data. Try again later.");
+          alert("Error while trying to load user data. Try again later.");
         }
       } catch (error) {
         console.error("Erro ao carregar os dados do utilizador:", error);
-        alert("Errow while trying to load user data. Verify your connection or try again later.");
+        alert("Error while trying to load user data. Verify your connection or try again later.");
       }
     };
 

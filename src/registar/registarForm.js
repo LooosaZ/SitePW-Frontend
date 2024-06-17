@@ -22,10 +22,10 @@ const Register = () => {
       .then((response) => {
         console.log(response);
         if (response.success) {
-          alert("Registro bem-sucedido! Faça o login para continuar.");
+          alert("Register was a success. Please login to continue.");
           navigate("/login");
         } else {
-          alert("Erro ao registrar novo usuário.");
+          alert("Error while creating a new user.");
         }
       })
       .catch((error) => {
@@ -40,47 +40,47 @@ const Register = () => {
         <div className="field">
           <label>Username:</label>
           <input className="username" {...register("username", { required: true })} />
-          {errors.username && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.username && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Password:</label>
           <input className="password" type="password" {...register("password", { required: true })} />
-          {errors.password && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.password && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
-          <label>Nome:</label>
+          <label>Name:</label>
           <input className="nome" {...register("nome", { required: true })} />
-          {errors.nome && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.nome && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
-          <label>Morada:</label>
+          <label>Address:</label>
           <input className="morada" {...register("morada", { required: true })} />
-          {errors.morada && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.morada && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
-          <label>Telemóvel:</label>
+          <label>Phone Number:</label>
           <input className="telemovel" {...register("telemovel", { required: true })} />
-          {errors.telemovel && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.telemovel && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
-          <label>Data de Nascimento:</label>
+          <label>Birthdate:</label>
           <input className="dataNascimento" type="date" {...register("dataNascimento", { required: true })} />
-          {errors.dataNascimento && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.dataNascimento && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>NIF:</label>
           <input className="nif" {...register("nif", { required: true })} />
-          {errors.nif && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.nif && <span className="error-message">This field can't be empty.</span>}
         </div>
         <div className="field">
           <label>Email:</label>
           <input className="email" type="email" {...register("email", { required: true })} />
-          {errors.email && <span className="error-message">Este campo é obrigatório.</span>}
+          {errors.email && <span className="error-message">This field can't be empty.</span>}
         </div>
         <input className="submit" type="submit" value="Registrar" />
       </form>
       <div className="login-link">
-        <Link to="/login">🡸 Já tem uma conta? Faça o login aqui.</Link>
+        <Link to="/login">🡸 Already have a login? Please continue here.</Link>
       </div>
     </div>
   );

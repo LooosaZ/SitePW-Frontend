@@ -30,7 +30,7 @@ const AdicionarProduto = () => {
             });
 
             if (response.ok) {
-                alert("Produto adicionado com sucesso!");
+                alert("Successfully added a new product!");
                 navigate("/produtos");
             } else {
                 const errorData = await response.json();
