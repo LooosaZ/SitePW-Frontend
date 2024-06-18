@@ -7,6 +7,8 @@ const ProductDetails = () => {
     const [productDetails, setProductDetails] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     const [token, setToken] = useState('');
+    const [quantity, setQuantity] = useState(1);
+    const [cartExists, setCartExists] = useState(false); // State para verificar se há um carrinho existente
 
     useEffect(() => {
         const fetchProductDetails = async () => {
@@ -45,6 +47,8 @@ const ProductDetails = () => {
                     // Verificar se a referência do produto está nos favoritos
                     const isFavoriteProduct = Array.isArray(favoritesData) && favoritesData.includes(referencia);
                     setIsFavorite(isFavoriteProduct);
+
+                    
                 }
             } catch (err) {
                 console.error('Erro ao buscar detalhes do produto:', err);
@@ -79,6 +83,64 @@ const ProductDetails = () => {
         }
     };
 
+    const addToCart = async () => {
+        try {
+            // Verificar se existe um carrinho existente para o usuário
+            const cartResponse = await fetch(`http://127.0.0.1:3001/menu/venda/me`, {
+                method: 'GET',
+                headers: {
+                    'x-access-token': `Bearer ${token}`
+                },
+                credentials: 'include'
+            });
+    
+            if (cartResponse.ok) {
+                const cartData = await cartResponse.json();
+                console.log('Carrinho do Utilizador:', cartData);
+    
+                // Verificar se há um carrinho com estado "no carrinho"
+                const existingCart = cartData.find(venda => venda.estado === 'no carrinho');
+    
+                if (existingCart) {
+                    const nrVenda = existingCart.nrVenda;
+                    console.log(nrVenda);
+                    // Já existe um carrinho com estado "no carrinho", atualiza a venda existente
+                    const response = await fetch(`http://127.0.0.1:3001/menu/venda/me`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ produtos: [{ refProduto: referencia, quantity }], nrVenda }), // Exemplo: atualizar a quantidade do produto no carrinho
+                        credentials: 'include'
+                    });
+                    const data = await response.json();
+                    console.log('Produto atualizado no carrinho:', data);
+                } else {
+                    // Não existe um carrinho com estado "no carrinho", cria um novo carrinho
+                    const response = await fetch(`http://127.0.0.1:3001/menu/venda/me`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-access-token': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({ referencia, quantity }), // Exemplo: adicionar a quantidade especificada do produto ao carrinho
+                        credentials: 'include'
+                    });
+                    const data = await response.json();
+                    console.log('Produto adicionado ao carrinho:', data);
+                }
+    
+            } else {
+                console.error('Erro ao verificar o carrinho do usuário');
+            }
+        } catch (err) {
+            console.error('Erro ao adicionar produto ao carrinho:', err);
+            // Lógica adicional, como exibir mensagem de erro ao usuário
+        }
+    };
+    
+
     if (!productDetails) {
         return <div>Carregando...</div>;
     }
@@ -96,31 +158,37 @@ const ProductDetails = () => {
                 )}
                 <div className="product-info">
                     <h2>{productDetails.preco.toFixed(2)} €</h2>
-                    <p className="note"> Vendido por: <strong>Brasicolage</strong></p>
+                    <p className="note"> Vendido por: <strong>JR Bricolage</strong></p>
                     <p><strong>Referência: {productDetails.referencia}</strong></p>
                     <p><strong>Nome:</strong> {productDetails.nome}</p>
                     <p><strong>Descrição:</strong> {productDetails.descricao}</p>
                     <p><strong>Categoria:</strong> {productDetails.categoria}</p>
                     {stock ? (
                         stock.quantidade > 0 ? (
-                            stock.quantidade < 5 ? (
-                                <p className="low-stock-info">🟡 Baixo stock ({stock.quantidade})</p>
+                            stock.quantidade < 50 ? (
+                                <p className="low-stock-info">🟡 Low stock ({stock.quantidade})</p>
+                            ) : (
+                                <p className="stock-info">🟢 In stock ({stock.quantidade})</p>
+                            )
                         ) : (
-                            <p className="stock-info">🟢 Em stock ({stock.quantidade})</p>
+                            <p className="no-stock-info">🔴 No stock</p>
                         )
                     ) : (
-                        <p className="no-stock-info">🔴 Sem stock</p>
-                    )
-                ) : (
-                    <p className="no-stock-info">Sem informações de stock disponíveis</p>
-                )}
-                    <div className="button-container">
-                        <button className="add-to-cart">ADICIONAR AO CARRINHO</button>
+                        <p className="no-stock-info">Sem informação de stock disponível</p>
+                    )}
+                    <div className="quantity-container">
+                        <p><strong>Quantity:</strong></p>
+                        <div className="qtd-container">
+                            <input className="qtd-prod" type="number" name="qtd" required step="1" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} />
+                        </div>
                         {token && (
                             <button className={`favorite-toggle ${isFavorite ? 'favorite' : ''}`} onClick={handleFavoriteToggle}>
                                 {isFavorite ? '★' : '☆'}
                             </button>
                         )}
+                    </div>
+                    <div className="container">
+                        <button className="add-to-cart" onClick={addToCart}>ADICIONAR AO CARRINHO</button>
                     </div>
                 </div>
             </div>

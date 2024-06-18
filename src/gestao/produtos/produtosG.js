@@ -118,13 +118,17 @@ const EditProductForm = () => {
         }
     };
 
+    const handleAddStock = () => {
+        navigate(`/admin/stock/adicionar/${referencia}`);
+    };
+
     return (
         <div className="edit-product">
             <h2>Edit Product</h2>
             <div className="form-container">
                 <form onSubmit={handleSubmit}>
                     <label>
-                        Reference:
+                        Referência:
                         <input type="text" name="referencia" value={product.referencia} readOnly />
                     </label>
                     <label>
@@ -132,7 +136,7 @@ const EditProductForm = () => {
                         <input type="text" name="nome" value={product.nome} onChange={handleChange} required />
                     </label>
                     <label>
-                        Description:
+                        Descrição:
                         <textarea name="descricao" value={product.descricao} onChange={handleChange} required />
                     </label>
                     <label>
@@ -147,8 +151,9 @@ const EditProductForm = () => {
                         <input type="text" name="categoria" value={product.categoria} onChange={handleChange} required />
                     </label>
                     <div className="button-container">
-                        <button type="submit" className="update-button">Update Product</button>
-                        <button type="button" className="delete-button" onClick={handleDelete}>Delete Product</button>
+                        <button type="submit" className="update-button">Atualizar Produto</button>
+                        <button type="button" className="delete-button" onClick={handleDelete}>Eliminar Produto</button>
+                        <button type="button" className="add-stock-button" onClick={handleAddStock}>Adicionar Stock</button>
                     </div>
                 </form>
                 <div className="image-panel">
@@ -156,10 +161,10 @@ const EditProductForm = () => {
                         Image:
                         {imagePreview && (
                             <div className="image-preview">
-                                <img src={imagePreview} alt="Product Image" />
+                                <img src={imagePreview} alt="Imagem do Produto" />
                             </div>
                         )}
-                        <input type="file" accept="image/*" onChange={handleImageChange} />
+                        <input type="file" accept="image/*" className="image-load" onChange={handleImageChange} />
                     </label>
                 </div>
             </div>

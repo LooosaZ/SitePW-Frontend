@@ -15,7 +15,11 @@ import AdicionarProduto from "./gestao/produtos/produtosA";
 import UserList from "./gestao/utilizadores/UserList";
 import UserEdit from "./gestao/utilizadores/UserEdit";
 import UserProfile from "./gestao/utilizadores/UserProfile";
-import ErrorPage from "./ErrorPage/ErrorPage.js";
+import ErrorPage from "./ErrorPage/ErrorPage";
+import Carrinho from "./carrinho/Carrinho";
+import Stock from "./gestao/stocks/Stocks";
+import Compra from "./carrinho/Carrinho"
+
 
 function App() {
     return (
@@ -23,20 +27,23 @@ function App() {
             <Header />
             <main>
                 <Routes>
+                    <Route path="/produtos" element={<Produtos />} />
                     <Route path="/login" element={<LoginForm />} />
+                    <Route path="/produtos/:referencia" element={<Produto />} />
                     <Route path="/registar" element={<Registar />} />
                     <Route path="/recover" element={<Recover />} />
                     <Route path="/reset" element={<Reset />} />
                     <Route path="/me" element={<User />} />
                     <Route path="/me/editar" element={<Editar />} />
                     <Route path="/me/editar/password" element={<Password />} />
-                    <Route path="/produtos" element={<Produtos />} />
-                    <Route path="/produtos/:referencia" element={<Produto />} />
                     <Route path="/admin/produto/:referencia" element={<GestaoProduto />} />
                     <Route path="/admin/produtos/adicionar" element={<AdicionarProduto />} />
                     <Route path="/admin/users" element={<UserList />} />
                     <Route path="/admin/users/:username" element={<UserProfile />} />
                     <Route path="/admin/users/edit/:username" element={<UserEdit />} />
+                    <Route path="/carrinho" element={<Carrinho />} />
+                    <Route path="/admin/stock/adicionar/:referencia" element={<Stock />} />
+                    <Route path="/confirmar" element={<Compra />} />
                     <Route path="/*" element={<ErrorPage />} />
                 </Routes>
             </main>

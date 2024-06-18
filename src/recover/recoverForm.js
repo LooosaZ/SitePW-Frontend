@@ -33,7 +33,7 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgotPasswordForm">
-      <h2>Redefinir palavra-passe</h2>
+      <h2>Recover your Password</h2>
       {resetSuccess ? (
         navigate("/reset")
       ) : (
@@ -42,12 +42,12 @@ const ForgotPassword = () => {
             <label>Email:</label>
             <input className="email" {...register("email")} />
           </div>
-          <input className="submit" type="submit" value="Enviar" />
+          <input className="submit" type="submit" value="Submit" />
           {errorMessage && <p className="error-message">{errorMessage}</p>}
         </form>
       )}
       <div className="return-link">
-        <Link to="/login">🡸 Voltar para a página de login</Link>
+        <Link to="/login">🡸 Take me back to login page</Link>
       </div>
     </div>
   );

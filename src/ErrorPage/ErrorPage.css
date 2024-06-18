@@ -5,7 +5,7 @@
     justify-content: center;
     height: 100vh;
     font-family: Arial, sans-serif;
-    color: #009739;
+    color: #012169;
     position: relative;
     line-height: 0.4;
 }
@@ -48,5 +48,5 @@ body {
 }
 
 .home-button:hover {
-    background-color: #c0392b;
+    background-color: #2b6cc0;
 }

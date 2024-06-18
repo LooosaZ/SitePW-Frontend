@@ -243,18 +243,7 @@ const ProductComponent = () => {
                                 Add new product
                             </button>
                         </Link>
-                        <br></br>
-                        <Link to="/admin/stock" className="add-product-link">
-                            <button className="add-product-button">
-                                Manage Stock
-                            </button>
-                        </Link>
-                        <br></br>
-                        <Link to="/admin/vendas" className="add-product-link">
-                            <button className="add-product-button">
-                            Manage Sales
-                            </button>
-                        </Link>
+                        <br></br><br></br>
                     </SidebarSection>
                 )}
                 <SidebarSection title="Name">
@@ -366,12 +355,13 @@ const ProductComponent = () => {
                     next={() => setPage(page)}
                     hasMore={page < totalPages}
                     loader={ <h4>Loading...</h4>}
-                    scrollThreshold={0.9}
+                    scrollThreshold={0.5}
                 >
                     <ProductGrid products={filteredProducts} isAdmin={isAdmin} />
-                    <br></br><br></br><br></br><br></br>
+                    <br></br><br></br>
                     {page >= totalPages && (
                 <p style={{ textAlign: 'center', marginTop: '20px', marginBottom: '40px' }}>
+                    <br></br><br></br>
                     <b>No more products avaliable for listing.</b>
                 </p>
             )}

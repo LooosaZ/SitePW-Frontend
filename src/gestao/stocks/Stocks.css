@@ -1,0 +1,84 @@
+:root {
+    --background-color: #f4f4f4;
+    --background-card: #ffffff;
+    --background-red: #31aa3b;
+    --background-dark_red:#31aa3b;
+    --text-primary: #31aa3b;
+    --text-secondary: #4b4b4b
+}
+
+.add-stock {
+    width: 50%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--background-card);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.add-stock h2 {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.form-add-stock .field {
+    margin-bottom: 15px;
+}
+
+.form-add-stock label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+}
+
+.input-text {
+    display: block;
+    width: calc(100% - 16px);
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+.input-select {
+    display: block;
+    width: calc(100%);
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+.input-number {
+  display: block, center;
+  width: calc(20% - 16px);
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+}
+
+.submit-button {
+    background-color: var(--background-red);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: var(--background-dark_red);
+    transform: scale(1.03);
+}

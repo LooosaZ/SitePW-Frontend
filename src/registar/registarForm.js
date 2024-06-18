@@ -77,7 +77,7 @@ const Register = () => {
           <input className="email" type="email" {...register("email", { required: true })} />
           {errors.email && <span className="error-message">This field can't be empty.</span>}
         </div>
-        <input className="submit" type="submit" value="Registrar" />
+        <input className="submit" type="submit" value="Register" />
       </form>
       <div className="login-link">
         <Link to="/login">🡸 Already have a login? Please continue here.</Link>
